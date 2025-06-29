@@ -2,11 +2,11 @@ import sqlite3
 from .database import DB
 from .models import Item
 
-class ItemManager: #    Create, Update and Delete the itens in the table
+class ItemManager: #    Items table CRUD
     def __init__(self, db: DB) -> None:
         self.database = db
         self.cur: sqlite3.Cursor = self.database.cur
-        self.item_table: str = self.database.itens_table[0]
+        self.item_table: str = self.database.items_table[0]
     
 
     def add_item(self, item_description: str, item_price: float) -> bool:
@@ -50,8 +50,7 @@ class ItemManager: #    Create, Update and Delete the itens in the table
 
     def get_item(self, item_id: int) -> Item | None:
         if item_data := self.cur.execute(f"SELECT * FROM {self.item_table} WHERE id=?", (item_id,)).fetchone():
-            item = Item(id=item_data[0], description=item_data[1], price=item_data[2])
-            return item
+            return Item(id=item_data[0], description=item_data[1], price=item_data[2])
         return None
     
 

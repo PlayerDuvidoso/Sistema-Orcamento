@@ -5,7 +5,7 @@ class DB:
         self.con = sqlite3.connect(f"App/SORC.db")
         self.cur = self.con.cursor()
         
-        self.itens_table: tuple[str] = self.add_table("itens") #  Creates the table if not already
+        self.items_table: tuple[str] = self.add_table("items") #  Creates the table if not already
 
 
     def add_table(self, table_name: str) :
